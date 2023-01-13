@@ -1,12 +1,14 @@
 from openpyxl import Workbook,load_workbook
-
+import re
 
 wb=load_workbook("tyres2.xlsx")
 
 def minPriceSorter(file):
     """Takes in an excel file with worksheets(>=1) of tyres and returns a dictionary sorting
      through each worksheet to find the cheapest tyres.
-     Can be made more generic"""
+     Can be made more generic
+     re.sub("\s|\v|Z", "" ,size )"""
+ 
     dict = {}
     wb = load_workbook(file)
     for ws in wb:
@@ -14,9 +16,9 @@ def minPriceSorter(file):
         column_=ws['A']
         x = 1
         while x <= len(column_):
-            size = ws[f"A{x}".replace(" ", "")].value
-            price = ws[f"B{x}".replace(" ", "")].value
-            brand = ws[f"C{x}".replace(" ", "")].value
+            size = ws[f"A{x}"].value
+            price = ws[f"B{x}"].value
+            brand = ws[f"C{x}"].value
             if size in dict:
                 if dict[size][0] <= price:
                     x += 1
@@ -25,7 +27,8 @@ def minPriceSorter(file):
             elif size is None or price is None:
                 x += 1
             else:   
-                dict.update({size :[price, f"{brand}" ]})  
+                #dict.update({re.sub("\s|\v|Z", "" ,size ) :[price, f"{brand}" ]})  
+                dict.update({size.replace(" ","").replace("Z",""):[price, f"{brand}" ]})
                 x += 1
     print("DEBUG:",f"{dict}\n")
     print("DEBUG:",len(dict))
@@ -46,4 +49,4 @@ def cheapestTyreTable(dictionary,file):
             wb.save(file)
             y+=1
 
-cheapestTyreTable(minPriceSorter("tyres2.xlsx"),"sorted.xlsx")
+cheapestTyreTable(minPriceSorter("tyres.xlsx"),"sorted.xlsx")
