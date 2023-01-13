@@ -33,4 +33,12 @@ def price_changer(file,qty,coloumn): #arg file and coloumn must be strings
     wb.save(file)
 
 
- 
+def brand_changer(file,brand,coloumn): #args must be string
+    coloumn_ =ws[coloumn]
+    for cell in coloumn_:
+        if cell.value == "Brand":
+            cell.value
+        else:
+            cell.value = f"{brand}"
+    wb.save(file)
+
