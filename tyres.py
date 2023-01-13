@@ -24,3 +24,13 @@ for ws in wb:
 print(f"{dict}\n")
 print(len(dict))
 
+y = 1
+while y < len(dict):
+    wb2 = load_workbook("sorted.xlsx")
+    ws2 = wb2.active
+    for key in dict:
+        ws2[f"A{y}"].value = key
+        ws2[f"B{y}"].value = dict[key][0]
+        ws2[f"C{y}"].value = dict[key][1]
+        wb2.save("sorted.xlsx")
+        y+=1
