@@ -24,10 +24,8 @@ print(dic)
 """
 def price_changer(file,qty,coloumn):    #arg file and coloumn must be strings 
     """ Changes value of each cell in {coloumn} by {qty} in {file} (file AKA workbook).
-    Parameters file and coloumn must be strings and qty must be an integer
-    
-    """ 
-    " Can be made more generic"                                    
+        Parameters file and coloumn must be strings and qty must be an integer""" 
+    "Can be made to work for non-price specific strings "                                    
     coloumn_ = ws[coloumn]
     print(coloumn)
     for cell in coloumn_:
@@ -40,7 +38,7 @@ def price_changer(file,qty,coloumn):    #arg file and coloumn must be strings
 
 def brand_changer(file,brand,coloumn):  #args must be string
     """ Changes  the brand of tyres to {brand} in {coloumn} in {file}. arguments must be strings"""
-    "Can be made more generic"                         
+    "Can be made to work for non-brand specific strings"                         
     coloumn_ =ws[coloumn]
     for cell in coloumn_:
         if cell.value == "Brand":
@@ -50,7 +48,7 @@ def brand_changer(file,brand,coloumn):  #args must be string
     wb.save(file)
 
 def sheet_creator(workbook,name): 
-    """ Creates an empty sheet , arguments must be strings"""
+    """ Creates an empty worksheet , arguments must be strings"""
     wb = load_workbook(workbook)
     wb.create_sheet(name)
     wb.save(workbook)
