@@ -3,11 +3,12 @@ from openpyxl import Workbook,load_workbook
 
 wb=load_workbook("tyres2.xlsx")
 
-def minPriceSorter(wb):
-    """Takes in a workbook of tyres and returns a dictionary sorting
-     through each tyre to find the cheapest ones.
+def minPriceSorter(file):
+    """Takes in an excel file with worksheets(>=1) of tyres and returns a dictionary sorting
+     through each worksheet to find the cheapest tyres.
      Can be made more generic"""
     dict = {}
+    wb = load_workbook(file)
     for ws in wb:
         print(ws.title)
         column_=ws['A']
@@ -44,3 +45,5 @@ def cheapestTyreTable(dictionary,file):
             ws[f"C{y}"].value = dictionary[key][1]
             wb.save(file)
             y+=1
+
+cheapestTyreTable(minPriceSorter("tyres2.xlsx"),"sorted.xlsx")
