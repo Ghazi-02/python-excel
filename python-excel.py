@@ -47,3 +47,11 @@ def sheet_creator(workbook,name):
     wb.create_sheet(name)
     wb.save(workbook)
 
+def workbook_creator(name,title):
+    """ Creates a workbook with  parameter {name} as its name,
+    and a single sheet with the  parameter {title} as the name of the sheet,
+    arguments must be strings"""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = title
+    wb.save(f"{name}.xlsx")
